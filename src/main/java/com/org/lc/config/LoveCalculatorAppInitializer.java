@@ -7,9 +7,14 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-public class LoveCalculatorAppInitializer  implements WebApplicationInitializer {
+// Approach I:
+// This is a way to initialize dispatcher servlet
+// But here we are doing so much config manually which can also be done by sp-ring
+// If we remove WebApplicationInitializer interface then this class will not be picked by the servlet container or tomcat
 
-    @Override
+public class LoveCalculatorAppInitializer // implements WebApplicationInitializer
+{
+    // @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
 
         // The below config is for, if we still want the spring config file in xml based
