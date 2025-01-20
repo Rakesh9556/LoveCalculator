@@ -1,6 +1,5 @@
 package com.org.lc.config;
 
-import jakarta.servlet.ServletContextListener;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 // Approach II:
