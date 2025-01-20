@@ -1,16 +1,32 @@
 package com.org.lc.controller;
 
-import com.org.lc.api.LcDto;
+import com.org.lc.api.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LCAppController {
 
+    /*
+    // We can rewrite the code in simple using @ModelAttribute
     @RequestMapping("/")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+
+        // Create the userDto object to initialize the non-static field (yourName, crushName) field
+        UserDto userDto = new UserDto();
+
+        // Setting the userDto object into model object
+        model.addAttribute("user", userDto);
+
+        return "Home";
+    }
+    */
+
+    // Using @ModelAttribute
+    @RequestMapping("/")
+    public String showHomePage(@ModelAttribute("user") UserDto userDto) {
         return "Home";
     }
 
@@ -54,13 +70,23 @@ public class LCAppController {
     // The above approach is still not reliable if we have 100 param then we need to write @RequestParam for each parameter
     // Also need to add those param to model object
     // So we will use DTO(Data Transfer Object) for directly binding the view page data with the model
+
+    /*
+    // We can rewrite the code in simple using @ModelAttribute
     @RequestMapping("/findLove")
-    public String findLove(LcDto lcDto, Model model) {
+    public String findLove(UserDto userDto, Model model) {
 
         // Set the dto object into model object
-        model.addAttribute("user", lcDto);
+        model.addAttribute("user", userDto);
 
 
+        return "LoveResult";
+    }
+    */
+
+    // using @ModelAttribute
+    @RequestMapping("/findLove")
+    public String findLove(@ModelAttribute("user") UserDto userDto) {
         return "LoveResult";
     }
 }

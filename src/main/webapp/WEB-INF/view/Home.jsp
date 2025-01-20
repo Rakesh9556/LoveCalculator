@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <title>Love Calculator</title>
@@ -63,12 +65,13 @@
             height: fit-content;
             padding: 15px;
             margin: 10px 0;
-            font-size: large;
+            font-size: larger;
             border: none;
             outline: none;
             border-radius: 10px;
             background-color: bisque;
-
+            color: darkred;
+            font-weight: bold;
         }
 
         #submitBtn {
@@ -89,20 +92,25 @@
 <body>
 <h1 align="center">Love Calculator</h1>
 <div class="container">
-    <form action="findLove" method="get">
+
+    <%--    This form is binded with the user model--%>
+    <%--    In order to fetch properties from the modelAttribute we need to use form tag in property--%>
+    <form:form action="findLove" method="get" modelAttribute="user">
         <p align="center">Find your love meter..</p>
 
         <label for="yourName">
             Your Name:
-            <input id="yourName" type="text" name="yourName" placeholder="Enter your name..." >
+            <%--   fetching property--%>
+            <%--   Instead of name use path to fetch property--%>
+            <form:input id="yourName" path="yourName" placeholder="Enter your name..." />
         </label>
 
         <label for="crushName">
             Crush Name:
-            <input id="crushName" type="text" name="crushName" placeholder="Enter your crush name..." >
+            <form:input id="crushName" path="crushName" placeholder="Enter your crush name..." />
         </label>
         <input id="submitBtn" type="submit" value="Calculate" />
-    </form>
+    </form:form>
 </div>
 </body>
 </html>
