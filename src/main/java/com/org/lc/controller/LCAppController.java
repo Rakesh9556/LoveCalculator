@@ -1,6 +1,8 @@
 package com.org.lc.controller;
 
 import com.org.lc.api.UserDto;
+import com.org.lc.api.UserInfoDto;
+import com.org.lc.dao.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +27,7 @@ public class LCAppController {
     */
 
     // Using @ModelAttribute
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String showHomePage(@ModelAttribute("user") UserDto userDto) {
         return "Home";
     }
@@ -46,8 +48,6 @@ public class LCAppController {
         return "LoveResult";
     }
     */
-
-
 
     // @RequestParam annotation will automatically bind the respective value from the view page
     // Note: param name should match to the field name of view page
@@ -89,4 +89,26 @@ public class LCAppController {
     public String findLove(@ModelAttribute("user") UserDto userDto) {
         return "LoveResult";
     }
+
+
+    @RequestMapping("/register")
+    public String showRegisterPage() {
+        return "Register";
+    }
+
+    @RequestMapping("/")
+    public String showLoginPage(@ModelAttribute("userInfo") UserInfoDto userInfoDto) {
+        return "Login";
+    }
+
+
+    // registering the user
+    @RequestMapping("/registerUser")
+    public String registerUser(@ModelAttribute("userInfo") UserInfoDto userInfo) throws Exception {
+        UserDao userDao = new UserDao();
+        userDao.registerUser(userInfo);
+        return "Login";
+    }
+
+
 }
