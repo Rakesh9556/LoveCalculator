@@ -1,15 +1,15 @@
 package com.org.lc.dao;
 
-import com.org.lc.api.UserInfoDto;
+import com.org.lc.api.UserRegistrationDto;
 import com.org.lc.config.DbConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.Arrays;
 
 public class UserDao {
 
-    public void registerUser(UserInfoDto userInfoDto) throws Exception {
+    public void registerUser(UserRegistrationDto userInfoDto) throws Exception {
 
         final String sql = "INSERT into user (fullname, username, password, country, hobby) values (?, ?, ?, ?, ?);";
 
@@ -18,9 +18,8 @@ public class UserDao {
 
             st.setString(1, userInfoDto.getFullName());
             st.setString(2, userInfoDto.getUserName());
-            st.setString(3, userInfoDto.getPassword());
-            st.setString(4, userInfoDto.getCountry());
-            st.setString(5, userInfoDto.getHobby());
+            st.setString(3, Arrays.toString(userInfoDto.getPassword()));
+
 
             int rowsAffected = st.executeUpdate();
 

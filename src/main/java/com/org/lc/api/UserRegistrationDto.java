@@ -1,11 +1,12 @@
 package com.org.lc.api;
 
-public class UserInfoDto {
+public class UserRegistrationDto {
     private String fullName;
     private String userName;
-    String password;
+    private char[] password;
     private String country;
-    private String hobby;
+    private String[] hobbies;
+    private String gender;
 
     public String getFullName() {
         return fullName;
@@ -23,11 +24,11 @@ public class UserInfoDto {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public char[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(char[] password) {
         this.password = password;
     }
 
@@ -39,11 +40,19 @@ public class UserInfoDto {
         this.country = country;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String[] getHobbies() {
+        return hobbies;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

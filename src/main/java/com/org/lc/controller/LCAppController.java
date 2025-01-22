@@ -1,10 +1,9 @@
 package com.org.lc.controller;
 
 import com.org.lc.api.UserDto;
-import com.org.lc.api.UserInfoDto;
+import com.org.lc.api.UserRegistrationDto;
 import com.org.lc.dao.UserDao;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -91,24 +90,11 @@ public class LCAppController {
     }
 
 
-    @RequestMapping("/register")
-    public String showRegisterPage() {
-        return "Register";
-    }
+
 
     @RequestMapping("/")
-    public String showLoginPage(@ModelAttribute("userInfo") UserInfoDto userInfoDto) {
+    public String showLoginPage(@ModelAttribute("userInfo") UserRegistrationDto userInfoDto) {
         return "Login";
     }
-
-
-    // registering the user
-    @RequestMapping("/registerUser")
-    public String registerUser(@ModelAttribute("userInfo") UserInfoDto userInfo) throws Exception {
-        UserDao userDao = new UserDao();
-        userDao.registerUser(userInfo);
-        return "Login";
-    }
-
 
 }
