@@ -1,7 +1,6 @@
 package com.org.lc.controller;
 
 import com.org.lc.api.UserRegistrationDto;
-import com.org.lc.dao.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;

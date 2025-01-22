@@ -3,9 +3,14 @@ package com.org.lc.controller;
 import com.org.lc.api.UserDto;
 import com.org.lc.api.UserRegistrationDto;
 import com.org.lc.dao.UserDao;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class LCAppController {
@@ -25,11 +30,6 @@ public class LCAppController {
     }
     */
 
-    // Using @ModelAttribute
-    @RequestMapping("/home")
-    public String showHomePage(@ModelAttribute("user") UserDto userDto) {
-        return "Home";
-    }
 
     /*
     // Type 1:
@@ -83,13 +83,32 @@ public class LCAppController {
     }
     */
 
-    // using @ModelAttribute
-    @RequestMapping("/findLove")
-    public String findLove(@ModelAttribute("user") UserDto userDto) {
-        return "LoveResult";
+    // Using @ModelAttribute
+    @RequestMapping("/home")
+    public String showHomePage(@ModelAttribute("user") UserDto userDto) {
+        return "Home";
     }
 
+    // using @ModelAttribute
+    @RequestMapping("/findLove")
+    // Validation will be triggered here
+    // As we this route is triggered when user submit the form of the home page
+    // So use @Valid -> to add validation
+    // We can store the validation result using BindingResult class
 
+    public String findLove(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result) {
+        if (result.hasErrors()) {
+
+            // Printing all errors
+            List<ObjectError> errors = result.getAllErrors();
+            for(ObjectError error : errors) {
+                System.out.println(error.getDefaultMessage());
+            }
+
+            return "Home";
+        }
+        return "LoveResult";
+    }
 
 
     @RequestMapping("/")

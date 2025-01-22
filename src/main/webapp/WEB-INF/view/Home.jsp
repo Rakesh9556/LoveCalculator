@@ -28,9 +28,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin:auto;
+            margin: auto;
             width: 40%;
-            height: 45%;
+            height: fit-content;
             border: 1px solid salmon;
             background-blend-mode: luminosity;
             border-top-right-radius: 100px;
@@ -44,7 +44,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin:auto;
+            margin: auto;
         }
 
         p {
@@ -55,7 +55,7 @@
         }
 
         label {
-            font-size:x-large;
+            font-size: x-large;
             font-weight: normal;
             color: darkred;
         }
@@ -87,7 +87,31 @@
             cursor: pointer;
         }
 
+        .errors {
+            color: red;
+            font-size: medium;
+            text-align: left;
+            margin-left: 70px;
+            margin-top: 5px;
+        }
+
     </style>
+
+    <%--    Validation--%>
+    <script type="text/javascript">
+        function validateUserInfo() {
+            let userName = document.getElementById("userName").value;
+            let crushName = document.getElementById("crushName").value;
+
+            if (userName.length < 3 || crushName.length < 3) {
+                alert("Name should have at least 3 characters")
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
 </head>
 <body>
 <h1 align="center">Love Calculator</h1>
@@ -98,18 +122,29 @@
     <form:form action="findLove" method="get" modelAttribute="user">
         <p align="center">Find your love meter..</p>
 
-        <label for="yourName">
+        <label for="userName">
             Your Name:
-            <%--   fetching property--%>
-            <%--   Instead of name use path to fetch property--%>
-            <form:input id="yourName" path="yourName" placeholder="Enter your name..." />
+                <%--   fetching property--%>
+                <%--   Instead of "name" use "path" to fetch property--%>
+            <form:input id="userName" path="userName" placeholder="Enter your name..."/>
         </label>
+        <form:errors path="userName" cssClass="errors" />
+
 
         <label for="crushName">
             Crush Name:
-            <form:input id="crushName" path="crushName" placeholder="Enter your crush name..." />
+            <form:input id="crushName" path="crushName" placeholder="Enter your crush name..."/>
         </label>
-        <input id="submitBtn" type="submit" value="Calculate" />
+        <form:errors path="crushName" cssClass="errors" />
+
+    <div>
+        <form:checkbox path="isTermsSigned" id="terms"/>
+        <label for="terms">Terms and conditions.</label>
+    </div>
+    <form:errors path="isTermsSigned" cssClass="errors"/>
+
+
+        <input id="submitBtn" type="submit" value="Calculate"/>
     </form:form>
 </div>
 </body>

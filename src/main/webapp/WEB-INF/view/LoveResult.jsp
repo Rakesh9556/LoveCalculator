@@ -109,7 +109,7 @@
     <h2 align="center">Your love meter result..</h2>
     <div class="result-container">
             <span class="content-container">
-                <p>${user.yourName}</p>
+                <p>${user.userName}</p>
                 <p>${user.crushName}</p>
             </span>
 
